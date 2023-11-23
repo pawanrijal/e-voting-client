@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import { Login } from "./components/login-form";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Login",

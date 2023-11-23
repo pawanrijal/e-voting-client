@@ -5,6 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { UserAuthForm } from "./components/user-auth-form";
 import { buttonVariants } from "@/components/ui/button";
+import "@/app/globals.css";
 
 export const metadata: Metadata = {
   title: "Signup",
