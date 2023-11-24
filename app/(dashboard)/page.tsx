@@ -27,9 +27,12 @@ export default function Home() {
             } else {
               toast.error(response.data.message);
             }
-          } catch (err) {
+          } catch (err: any) {
             toast.error("Something went wrong");
             console.log("Profile error", err);
+            if (err.response.data.message == "jwt expired") {
+              router.push("/auth/login");
+            }
           }
         }
       }

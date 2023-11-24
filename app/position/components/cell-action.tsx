@@ -1,7 +1,6 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
@@ -16,11 +15,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 // import { AlertModal } from "@/components/modals/alert-modal";
 
-import { ElectionColumn } from "./columns";
+import { PositionColumn } from "./columns";
 import { baseUrl } from "@/lib/utils";
 
 interface CellActionProps {
-  data: ElectionColumn;
+  data: PositionColumn;
 }
 
 export const CellAction: React.FC<CellActionProps> = ({ data }) => {
@@ -29,14 +28,14 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Billboard ID copied to clipboard.");
+    toast.success("Position ID copied to clipboard.");
   };
   const handleDelete = async (id: string) => {
     const isconfirmed = window.confirm("Are you sure you want to delete?");
     const token = localStorage.getItem("auth_token");
     if (isconfirmed) {
       try {
-        await axios.delete(`${baseUrl}/election/${id}`, {
+        await axios.delete(`${baseUrl}/position/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         toast.success("Deleted Successfully");
@@ -49,12 +48,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   };
   return (
     <>
-      {/* <AlertModal
-        isOpen={open}
-        onClose={() => setOpen(false)}
-        onConfirm={onConfirm}
-        loading={loading}
-      /> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -67,7 +60,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
           <DropdownMenuItem onClick={() => onCopy(data.id)}>
             <Copy className="mr-2 h-4 w-4" /> Copy Id
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => router.push(`/election/${data.id}`)}>
+          <DropdownMenuItem onClick={() => router.push(`/position/${data.id}`)}>
             <Edit className="mr-2 h-4 w-4" /> Update
           </DropdownMenuItem>
           <DropdownMenuItem onClick={() => handleDelete(data.id)}>

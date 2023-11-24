@@ -4,9 +4,10 @@ import Navbar from "@/components/admin/Navbar";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { ElectionForm } from "./components/election-form";
+import { PositionForm } from "./components/position-form";
+import { findPositionById } from "@/apis/position/findById";
 
-const ElectionPage = ({ params }: { params: { electionId: number } }) => {
+const PositionPage = ({ params }: { params: { positionId: number } }) => {
   const router = useRouter();
   const [electionData, setElectionData] = useState(null);
   const [token, setToken] = useState("");
@@ -19,7 +20,7 @@ const ElectionPage = ({ params }: { params: { electionId: number } }) => {
         } else {
           setToken(token);
           try {
-            const response = await findElectionById(token, params.electionId);
+            const response = await findPositionById(token, params.positionId);
             if (response.status === 200) {
               setElectionData(response.data.data);
             } else {
@@ -39,10 +40,10 @@ const ElectionPage = ({ params }: { params: { electionId: number } }) => {
       <Navbar />
       <div className="flex-col">
         <div className="flex-1 space-y-4 p-8 pt-6">
-          <ElectionForm initialData={electionData} token={token} />
+          <PositionForm initialData={electionData} token={token} />
         </div>
       </div>
     </>
   );
 };
-export default ElectionPage;
+export default PositionPage;
