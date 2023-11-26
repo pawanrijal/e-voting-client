@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Navbar from "@/components/admin/Navbar";
 import { getElectionStatus } from "@/lib/utils";
+import { useRole } from "@/hooks/useRoleStore";
 
 const Election = () => {
   const router = useRouter();
   const [electionsData, setElectionsData] = useState([]);
+  const roleStore = useRole();
   useEffect(() => {
     const fetchData = async () => {
       if (typeof window !== "undefined" && window.localStorage) {
@@ -33,6 +35,9 @@ const Election = () => {
     };
     fetchData();
   }, []);
+  if (roleStore.role != "Admin") {
+    return <>Unauthorized</>;
+  }
   const formattedData = electionsData.map((item: any) => ({
     id: item.id,
     name: item.name,

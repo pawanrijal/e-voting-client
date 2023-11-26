@@ -2,6 +2,7 @@
 import { getProfile } from "@/apis/auth/profile";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import { useAuth } from "@/hooks/useAuthStore";
+import { useRole } from "@/hooks/useRoleStore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -11,6 +12,7 @@ export default function Home() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const auth = useAuth();
+  const role = useRole();
   useEffect(() => {
     const fetchData = async () => {
       if (typeof window !== "undefined" && window.localStorage) {
@@ -24,6 +26,8 @@ export default function Home() {
             const response = await getProfile(token);
             if (response.status === 200) {
               setUserRole(response.data.data.roleName);
+              role.setRole(response.data.data.roleName);
+              auth.setUser(response.data.data);
             } else {
               toast.error(response.data.message);
             }
@@ -45,7 +49,7 @@ export default function Home() {
 
   return (
     <div>
-      {userRole === "Admin" ? <AdminDashboard /> : <div>User Dashboard</div>}
+      <AdminDashboard />
     </div>
   );
 }

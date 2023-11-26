@@ -5,11 +5,13 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ElectionForm } from "./components/election-form";
+import { useRole } from "@/hooks/useRoleStore";
 
 const ElectionPage = ({ params }: { params: { electionId: number } }) => {
   const router = useRouter();
   const [electionData, setElectionData] = useState(null);
   const [token, setToken] = useState("");
+  const roleStore = useRole();
   useEffect(() => {
     const fetchData = async () => {
       if (typeof window !== "undefined" && window.localStorage) {
@@ -34,6 +36,9 @@ const ElectionPage = ({ params }: { params: { electionId: number } }) => {
     };
     fetchData();
   }, []);
+  if (roleStore.role != "Admin") {
+    return <>Unauthorized</>;
+  }
   return (
     <>
       <Navbar />

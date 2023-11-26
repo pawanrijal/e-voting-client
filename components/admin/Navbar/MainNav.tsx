@@ -1,5 +1,6 @@
 "use client";
 
+import { useRole } from "@/hooks/useRoleStore";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
@@ -11,8 +12,14 @@ const MainNav = ({
 }: React.HTMLAttributes<HTMLElement>) => {
   const pathname = usePathname();
   const params = useParams();
+  const role = useRole();
 
-  const routes = [
+  const adminRoutes = [
+    {
+      href: `/`,
+      label: "Dashboard",
+      active: pathname === `/`,
+    },
     {
       href: `/election`,
       label: "Election",
@@ -23,6 +30,19 @@ const MainNav = ({
       label: "Position",
       active: pathname === `/position`,
     },
+    {
+      href: `/candidate`,
+      label: "Candidate",
+      active: pathname === `/candidate`,
+    },
+  ];
+
+  const userRoutes = [
+    {
+      href: `/`,
+      label: "Dashboard",
+      active: pathname === `/`,
+    },
   ];
 
   return (
@@ -30,20 +50,36 @@ const MainNav = ({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
-      {routes.map((route) => (
-        <Link
-          key={route.href}
-          href={route.href}
-          className={cn(
-            "text-md font-medium transition-colors hover:text-primary",
-            route.active
-              ? "text-black dark:text-white"
-              : "text-muted-foreground"
-          )}
-        >
-          {route.label}
-        </Link>
-      ))}
+      {role.role === "Admin" &&
+        adminRoutes.map((adminRoute) => (
+          <Link
+            key={adminRoute.href}
+            href={adminRoute.href}
+            className={cn(
+              "text-md font-medium transition-colors hover:text-primary",
+              adminRoute.active
+                ? "text-black dark:text-white"
+                : "text-muted-foreground"
+            )}
+          >
+            {adminRoute.label}
+          </Link>
+        ))}
+      {role.role === "Voter" &&
+        userRoutes.map((userRoute) => (
+          <Link
+            key={userRoute.href}
+            href={userRoute.href}
+            className={cn(
+              "text-md font-medium transition-colors hover:text-primary",
+              userRoute.active
+                ? "text-black dark:text-white"
+                : "text-muted-foreground"
+            )}
+          >
+            {userRoute.label}
+          </Link>
+        ))}
     </nav>
   );
 };
