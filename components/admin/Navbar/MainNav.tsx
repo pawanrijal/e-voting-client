@@ -13,8 +13,13 @@ const MainNav = ({
   const pathname = usePathname();
   const params = useParams();
   const role = useRole();
+  interface route {
+    href: string;
+    label: string;
+    active: boolean;
+  }
 
-  const adminRoutes = [
+  const adminRoutes: route[] = [
     {
       href: `/`,
       label: "Dashboard",
@@ -37,11 +42,21 @@ const MainNav = ({
     },
   ];
 
-  const userRoutes = [
+  const userRoutes: route[] = [
     {
       href: `/`,
       label: "Dashboard",
       active: pathname === `/`,
+    },
+    {
+      href: "/user/election",
+      label: "Elections",
+      active: pathname === "/user/election",
+    },
+    {
+      href: "/user/candidate",
+      label: "My Candidancy",
+      active: pathname === "/user/candidate",
     },
   ];
 
@@ -65,7 +80,7 @@ const MainNav = ({
             {adminRoute.label}
           </Link>
         ))}
-      {role.role === "Voter" &&
+      {role.role === "User" &&
         userRoutes.map((userRoute) => (
           <Link
             key={userRoute.href}

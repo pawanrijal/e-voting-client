@@ -31,7 +31,7 @@ export const CandidateClient: React.FC<CandidateClientProps> = ({ data }) => {
         </Button> */}
       </div>
       <Separator />
-      <DataTable searchKey="label" columns={columns} data={data} />
+      <DataTable searchKey="name" columns={columns} data={data} />
       <Separator />
     </>
   );

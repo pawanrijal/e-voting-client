@@ -31,7 +31,7 @@ export const PositionClient: React.FC<PositionClientProps> = ({ data }) => {
         </Button>
       </div>
       <Separator />
-      <DataTable searchKey="label" columns={columns} data={data} />
+      <DataTable searchKey="name" columns={columns} data={data} />
       <Separator />
     </>
   );

@@ -48,7 +48,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
     };
     fetchData();
   }, []);
-  if (roleStore.role != "Admin") {
+  if (roleStore.role != "User" && roleStore.role != "") {
     return <>Unauthorized</>;
   }
 
