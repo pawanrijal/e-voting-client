@@ -48,7 +48,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
     };
     fetchData();
   }, []);
-  if (roleStore.role != "User" && roleStore.role != "") {
+  if (roleStore.role != "Admin" && roleStore.role != "") {
     return <>Unauthorized</>;
   }
 
@@ -75,7 +75,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
         </div>
         <div className="mx-[50px]">
           <Card>
-            <div className="md:grid md:grid-cols-3 gap-8">
+            <div className="md:grid md:grid-cols-4 gap-8">
               <CardHeader>
                 <CardTitle>Name</CardTitle>
                 <CardDescription>{candidateData?.name}</CardDescription>
@@ -92,11 +92,17 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
                   {candidateData?.position?.name}
                 </CardDescription>
               </CardHeader>
+              <CardHeader>
+                <CardTitle>VoteCount</CardTitle>
+                <CardDescription>{candidateData?.voteCount}</CardDescription>
+              </CardHeader>
             </div>
             <div>
               <CardHeader>
                 <CardTitle>Manifesto</CardTitle>
-                <CardDescription>{candidateData?.manifesto} </CardDescription>
+                <CardDescription
+                  dangerouslySetInnerHTML={{ __html: candidateData?.manifesto }}
+                ></CardDescription>
               </CardHeader>
             </div>
             {candidateData?.status === 0 && (

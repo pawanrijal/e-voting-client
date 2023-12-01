@@ -36,7 +36,7 @@ const Candidate = () => {
     };
     fetchData();
   }, []);
-  if (role.role != "Admin") {
+  if (role.role != "Admin" && role.role != "") {
     return <>Unauthorized</>;
   }
   const formattedData = candidatesData.map((item: any) => ({

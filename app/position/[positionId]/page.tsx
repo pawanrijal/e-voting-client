@@ -37,7 +37,7 @@ const PositionPage = ({ params }: { params: { positionId: number } }) => {
     };
     fetchData();
   }, []);
-  if (roleStore.role != "Admin") {
+  if (roleStore.role != "Admin" && roleStore.role != "") {
     return <>Unauthorized</>;
   }
   return (

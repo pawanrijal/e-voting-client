@@ -1,7 +1,14 @@
 "use client";
 
 import axios from "axios";
-import { Copy, Edit, MoreHorizontal, Trash, ViewIcon } from "lucide-react";
+import {
+  Copy,
+  Edit,
+  MoreHorizontal,
+  Trash,
+  View,
+  ViewIcon,
+} from "lucide-react";
 import { toast } from "react-hot-toast";
 import { useParams, useRouter } from "next/navigation";
 
@@ -66,9 +73,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             <ViewIcon className="mr-2 h-4 w-4" />
             Details
           </DropdownMenuItem>
-          {/* <DropdownMenuItem onClick={() => handleDelete(data.id)}>
-            <Trash className="mr-2 h-4 w-4" /> Delete
-          </DropdownMenuItem> */}
         </DropdownMenuContent>
       </DropdownMenu>
     </>
