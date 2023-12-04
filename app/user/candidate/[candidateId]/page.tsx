@@ -23,6 +23,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
   const router = useRouter();
   const [candidateData, setCandidateData] = useState({});
   const [token, setToken] = useState("");
+  const [voteStatus, setVoteStatus] = useState("");
   const roleStore = useRole();
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +47,20 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
         }
       }
     };
+    const fetchStatus = async () => {
+      try {
+        const token = localStorage.getItem("auth_token");
+        const response = await axios.get(
+          `${baseUrl}/position/getVoteResult/${params.candidateId}`,
+          { headers: { Authorization: `bearer ${token}` } }
+        );
+        setVoteStatus(response.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
     fetchData();
+    fetchStatus();
   }, []);
   if (roleStore.role != "User" && roleStore.role != "") {
     return <>Unauthorized</>;
@@ -85,7 +99,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
               </CardHeader>
               <CardHeader>
                 <CardTitle>Vote Status</CardTitle>
-                <CardDescription>Won </CardDescription>
+                <CardDescription>{voteStatus} </CardDescription>
               </CardHeader>
             </div>
             <div>

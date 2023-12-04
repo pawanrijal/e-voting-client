@@ -68,7 +68,6 @@ export const RequestForm = ({
       router.refresh();
       router.push(`/user/candidate`);
     } catch (error: any) {
-      console.log(error);
       toast.error(error.response.data.message);
     } finally {
       setLoading(false);
