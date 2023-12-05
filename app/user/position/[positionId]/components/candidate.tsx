@@ -39,7 +39,7 @@ const Candidate: FC<CandidateProps> = ({
           {/* <CardDescription>Card Description</CardDescription> */}
         </CardHeader>
         <CardContent>
-          <p>{description}</p>
+          <p dangerouslySetInnerHTML={{ __html: description }}></p>
         </CardContent>
         {/* <CardFooter>
         <p>Card Footer</p>

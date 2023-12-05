@@ -95,7 +95,7 @@ const CandidatePage = ({ params }: { params: { candidateId: number } }) => {
             <div className="md:grid md:grid-cols-3 gap-8">
               <CardHeader>
                 <CardTitle>Vote Count</CardTitle>
-                <CardDescription>{10} </CardDescription>
+                <CardDescription>{candidateData?.voteCount} </CardDescription>
               </CardHeader>
               <CardHeader>
                 <CardTitle>Vote Status</CardTitle>

@@ -3,6 +3,7 @@ import { getProfile } from "@/apis/auth/profile";
 import AdminDashboard from "@/components/admin/AdminDashboard";
 import { useAuth } from "@/hooks/useAuthStore";
 import { useRole } from "@/hooks/useRoleStore";
+import { TanstackProvider } from "@/providers/TanstackProvider";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -49,7 +50,9 @@ export default function Home() {
 
   return (
     <div>
-      <AdminDashboard />
+      <TanstackProvider>
+        <AdminDashboard />
+      </TanstackProvider>
     </div>
   );
 }

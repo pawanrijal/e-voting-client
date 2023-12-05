@@ -69,6 +69,7 @@ const ElectionPage = ({ params }: { params: { positionId: number } }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       toast.success("Voted");
+      router.push("/user/election");
     } catch (err: any) {
       console.log(err.response.data.message);
       toast.error(err.response.data.message);
@@ -80,7 +81,7 @@ const ElectionPage = ({ params }: { params: { positionId: number } }) => {
       const response = await getVotedCandidate(token!, params.positionId);
       setVotedCandidateData(response.data.data);
     } catch (err: any) {
-      toast.error(err.response.data.message);
+      // toast.error(err.response.data.message);
     }
   };
   return (

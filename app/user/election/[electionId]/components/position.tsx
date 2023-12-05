@@ -33,7 +33,7 @@ const Position: FC<PositionProps> = ({ name, description, id }) => {
       const response = await getVotedCandidate(token!, id);
       setCandidateData(response.data.data);
     } catch (err: any) {
-      toast.error(err.response.data.message);
+      // toast.error(err.response.data.message);
     }
   };
   return (

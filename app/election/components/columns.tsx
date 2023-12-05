@@ -18,10 +18,10 @@ export const columns: ColumnDef<ElectionColumn>[] = [
     accessorKey: "name",
     header: "Name",
   },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
+  // {
+  //   accessorKey: "status",
+  //   header: "Status",
+  // },
   {
     accessorKey: "createdBy",
     header: "Created By",
