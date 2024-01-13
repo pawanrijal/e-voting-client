@@ -3,6 +3,7 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useQuery } from "@tanstack/react-query";
 import { baseUrl } from "@/lib/utils";
+import { HomomorphicDecrypt } from "./decrypt";
 
 const Admin = () => {
   const token = localStorage.getItem("auth_token");
@@ -17,6 +18,11 @@ const Admin = () => {
   if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
+
+  const decryptedData = HomomorphicDecrypt(data);
+
+
+  
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 my-10 mx-5">
       <Card>
@@ -38,7 +44,7 @@ const Admin = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.data.voters}</div>
+          <div className="text-2xl font-bold">{decryptedData.voters}</div>
         </CardContent>
       </Card>
       <Card>
@@ -60,7 +66,7 @@ const Admin = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.data.candidates}</div>
+          <div className="text-2xl font-bold">{decryptedData.candidates}</div>
         </CardContent>
       </Card>
       <Card>
@@ -81,7 +87,7 @@ const Admin = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.data.elections}</div>
+          <div className="text-2xl font-bold">{decryptedData.elections}</div>
         </CardContent>
       </Card>
       <Card>
@@ -101,7 +107,7 @@ const Admin = () => {
           </svg>
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{data.data.positions}</div>
+          <div className="text-2xl font-bold">{decryptedData.positions}</div>
         </CardContent>
       </Card>
     </div>

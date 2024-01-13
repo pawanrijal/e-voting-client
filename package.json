@@ -27,6 +27,7 @@
     "@tiptap/react": "^2.1.12",
     "@tiptap/starter-kit": "^2.1.12",
     "axios": "^1.6.2",
+    "big-integer": "^1.6.52",
     "ckbox": "^2.2.0",
     "ckeditor5-custom-build": "file:ckeditor5",
     "class-variance-authority": "^0.7.0",
