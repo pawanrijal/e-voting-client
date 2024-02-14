@@ -35,9 +35,9 @@ const Election = () => {
     };
     fetchData();
   }, []);
-  if (roleStore.role != "Admin") {
-    return <>Unauthorized</>;
-  }
+  // if (roleStore.role != "Admin") {
+  //   return <>Unauthorized</>;
+  // }
   const formattedData = electionsData.map((item: any) => ({
     id: item.id,
     name: item.name,

@@ -24,9 +24,10 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 const formSchema = z.object({
   name: z.string(),
-  startDate: z.string(),
   description: z.string(),
-  endDate: z.string(),
+  // startDate: z.string(),
+  // endDate: z.string(),
+  time: z.string(),
 });
 
 type ElectionFormValues = z.infer<typeof formSchema>;
@@ -74,8 +75,9 @@ export const ElectionForm = ({
     defaultValues: {
       name: initialData?.name,
       description: initialData?.description,
-      startDate: initialData?.startDate,
-      endDate: initialData?.endDate,
+      // startDate: initialData?.startDate,
+      // endDate: initialData?.endDate,
+      time: initialData?.time,
     },
   });
   const handleDelete = async (id: string) => {
@@ -134,7 +136,7 @@ export const ElectionForm = ({
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="startDate"
               render={({ field }) => (
@@ -152,8 +154,8 @@ export const ElectionForm = ({
                   <FormMessage />
                 </FormItem>
               )}
-            />
-            <FormField
+            /> */}
+            {/* <FormField
               control={form.control}
               name="endDate"
               render={({ field }) => (
@@ -171,7 +173,24 @@ export const ElectionForm = ({
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
+            <FormField control={form.control} name="time" render={({ field }) => (
+              <FormItem>
+                <FormLabel>Time Validity (In Minutes)</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    disabled={loading}
+                    {...field}
+                    defaultValue={initialData?.time}
+                    required={initialData ? false : true}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}>
+
+            </FormField>
           </div>
           <div className="md:grid md:grid-cols-1 gap-8">
             <FormField
