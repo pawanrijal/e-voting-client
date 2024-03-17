@@ -26,7 +26,7 @@ const formSchema = z.object({
 
 export type LoginFormValues = z.infer<typeof formSchema>;
 
-interface LoginProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface LoginProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function Login({ className, ...props }: LoginProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -39,9 +39,17 @@ export function Login({ className, ...props }: LoginProps) {
       const response = await login(data);
       console.log("login response", response);
       if (response.data.status === 200) {
-        toast.success("Login Successfully");
+
         localStorage.setItem("auth_token", response.data.data.token);
-        router.push("/");
+        // router.push("/");
+        if (!response.data.data.verified) {
+          toast.success("Please verify your email address.");
+          router.push("/auth/verify-otp");
+        }
+        else {
+          toast.success("Login Successfully");
+          router.push("/");
+        }
       } else {
         toast.error(response.data.message);
       }

@@ -33,7 +33,7 @@ const formSchema = z.object({
 
 export type SignupFormValues = z.infer<typeof formSchema>;
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -47,7 +47,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       console.log("signup response", response);
       if (response.data.status === 200) {
         toast.success("Signup Successfully");
-        router.push("/auth/login");
+        router.push("/auth/verify-otp");
       } else {
         toast.error(response.data.message);
       }
